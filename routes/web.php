@@ -47,6 +47,7 @@ Route::get('/', function () {
 
 
 
+
 //后台 首页 路由
 Route::get('admin','Admin\IndexController@index');
 
