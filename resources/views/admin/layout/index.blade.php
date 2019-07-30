@@ -37,8 +37,38 @@
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 
-<title>MWS Admin - Form Elements</title>
+<title>软件学院</title>
+<style type="text/css">
+    #page_page li{
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        
+    }
 
+    #page_page a{
+        position:relative;
+        float:left;
+        padding:6px 12px;
+        line-height:1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color:#fff;
+        border:1px solid #ddd;
+    }
+
+    #page_page span{
+        position:relative;
+        float:left;
+        padding:6px 12px;
+        line-height:1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color:#fff;
+        border:1px solid #ddd;
+    }
+
+</style>
 </head>
 
 <body>
@@ -297,10 +327,31 @@
         <div id="mws-container" class="clearfix">
 
 			<!-- 内容的开始 -->
-        	<div class="container"></div>
+        	<div class="container">
+
+                <!-- 读取 提示 消息 -->
+                <!-- @if (session('status'))
+                    <div class="mws-form-message success">
+                        {{ session('success') }}
+                    </div>
+                @endif -->
+
+                @if (session('error'))
+                    <div class="mws-form-message error">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="mws-form-message success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 @section('content')
 
                 @show
+            </div>
             <!-- 内容的结束 -->   
 
             <!-- Footer -->
