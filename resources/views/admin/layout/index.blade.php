@@ -312,6 +312,15 @@
                             
                         </ul>
                     </li>
+
+                    <li class="active">
+                        <a href="/d/#"><i class="icon-list"></i>分类管理</a>
+                        <ul> 
+                            <li><a href="/admin/cates">分类列表</a></li>
+                            <li><a href="/admin/cates/create">分类添加</a></li>
+                            
+                        </ul>
+                    </li>
                     
                     <!-- <li>
                         <a href="/d/icons.html">

@@ -53,3 +53,6 @@ Route::get('admin','Admin\IndexController@index');
 
 //后台 用户 路由
 Route::resource('admin/users','Admin\UsersController');
+
+//后台 分类 路由
+Route::resource('admin/cates','Admin\CatesController');

@@ -21,7 +21,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->page);
+        // dd($request->page); 
         $search = $request->input('search','');
 
         // 获取数据
