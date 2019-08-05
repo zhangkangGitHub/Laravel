@@ -41,11 +41,57 @@
 
 
 
-//后台 首页 路由
-Route::get('admin','Admin\IndexController@index');
 
-//后台 用户 路由
-Route::resource('admin/users','Admin\UsersController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -105,9 +151,19 @@ Route::get('/','Home\IndexController@index');
 
 //前台登录页面
 Route::get('home/user/login','Home\UserController@lindex');
+//执行前台登录
+Route::post('home/user/login','Home\UserController@store');
 
-//前台注册页面
-Route::get('home/user/register','Home\UserController@rindex');
+//前台注册页面 邮箱 手机号
+Route::get('home/register','Home\RegisterController@index');
+//执行前台邮箱注册
+Route::post('home/register','Home\RegisterController@store');
+//执行前台邮箱注册激活
+Route::get('home/register/changestatus','Home\RegisterController@changestatus');
+//前台手机验证码
+Route::get('home/register/sendPhone','Home\RegisterController@sendPhone');
+//处理前台手机号注册数据
+Route::post('home/register/insert','Home\RegisterController@insert');
 
 //前台个人中心页面
 Route::get('home/user/userdetail','Home\UserController@uindex');

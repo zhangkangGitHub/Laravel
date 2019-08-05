@@ -13,4 +13,5 @@ class IndexController extends Controller
     	// 显示模板
     	return view('home.index.index');
     }
+
 }
