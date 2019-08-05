@@ -321,6 +321,30 @@
                             
                         </ul>
                     </li>
+
+                    
+                    <li class="active">
+                        <a href="/d/#"><i class="icon-list"></i>管理员管理</a>
+                        <ul> 
+                            <li><a href="/admin/adminuser">管理员列表</a></li>
+                            <li><a href="/admin/adminuser/create">管理员添加</a></li>                           
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="/d/#"><i class="icon-list"></i>角色管理</a>
+                        <ul> 
+                            <li><a href="/admin/roles">角色列表</a></li>
+                            <li><a href="/admin/roles/create">角色添加</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"> 
+                        <a href="/d/#"><i class="icon-list"></i>权限管理</a>
+                        <ul> 
+                            <li><a href="/admin/nodes">权限列表</a></li>
+                            <li><a href="/admin/nodes/create">权限添加</a></li>
+                        </ul>
+                    </li>
                     
                     <!-- <li>
                         <a href="/d/icons.html">
