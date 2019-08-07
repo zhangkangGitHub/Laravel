@@ -4,67 +4,43 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-use Hash;
 use App\Models\Users;
+use App\Models\Userinfo;
 
 class UserController extends Controller
 {
-    /**
-     * 显示登录页面.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function lindex()
+    // 显示我的订单页面
+    public function oindex()
     {
-        //加载登录页面
-        return view('home.user.login');
+        return view('home.user.user_order');
     }
-
-    /**
-     * 操作登录数据.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // dd($request->all());
-        $users = new Users;
-        //获取信息
-        $name = $request->input('user');
-        $upass = $request->input('upass');
-
-        $users = DB::table('users')->where('uname',$name)->first();
-        // dd($upass,$users,$users->upass);
-        // dd(Hash::make($upass));
-        // 判断用户名是否存在
-        if(!$users){
-            echo "<script>alert('用户名错误');location.href='/home/user/login';</script>";
-            exit;
-        }
-
-        // 判断密码是否输入正确
-        if(!Hash::check($upass, $users->upass)){
-            echo "<script>alert('密码错误');location.href='/home/user/login';</script>";
-            exit;
-        }
-
-
-        //登录成功
-        session(['home_login'=>true]);
-        session(['home_users'=>$users]);
-
-        //跳转
-        return redirect('/');
-        
-    }
-
+    
     //显示个人中心页面
     public function uindex()
     {
         //页面显示
+        // dump($_SESSION);
         return view('home.user.userdetail');
+    }
+
+    //执行个人信息修改
+    public function phone(Request $request)
+    {
+        dd($request->all());
+
+        // 获取信息
+        $users = new Users;
+        $uname = $request->input('uname','');
+        $upass = $request->input('pass','');
+        $phone = $request->input('phone','');
+        $email = $request->input('email','');
+
+        $users = DB::table('users')->where('uname',$uname)->first();
+        
+        // 判断是否修改成功
+        if($users->save()){
+            echo "<script>alert('修改成功');location.href='/home/user/userdetail';</script>";
+        }
     }
 
     //显示账户安全页面
@@ -88,6 +64,7 @@ class UserController extends Controller
         return view('home.user.user_addres');
     }
 
+    
     /**
      * 显示添加页面.
      *
@@ -144,4 +121,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

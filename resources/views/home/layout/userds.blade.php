@@ -98,7 +98,27 @@
         </span>
         <!--End 所在收货地区 End-->
         <span class="fr">
-            <span class="fl">你好，请<a href="/home/user/login">登录</a>&nbsp; <a href="/home/user/regist" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|</span>
+            @if($_SESSION['home_login'] !== true)
+                <span class="fl">你好，请<a href="/home/user/login">登录</a>&nbsp; <a href="/home/register" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|</span>
+            @else
+                <div class="ss_list">
+                    <a>{{$_SESSION['home_users']->uname}}</a>
+                    <div class="ss_list_bg">
+                        <div class="s_city_t"></div>
+                        <div class="ss_list_c">
+                            <div style="padding:10px 0 10px 15px;overflow:hidden;">
+                                <a href="/home/user/userdetail">
+                                    <img src="/uploads/{{$_SESSION['home_userinfo']->profile}}" title="点击头像 进入个人中心" style="width:40px;height:40px;border-radius:50%;margin-left:-13px;margin-top:-10px;"/>
+                                </a>
+                                <a href="/home/login/laout" style="float:right;margin-right:3px;margin-top:-22px;">退出</a>
+                                <li style="margin-left:20px;margin-top:-30px;">  
+                                    {{$_SESSION['home_users']->uname}}
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <span class="ss">
                 <div class="ss_list">
                     <a href="#">收藏夹</a>
@@ -151,8 +171,7 @@
             <form>
                 <input type="text" value="" class="m_ipt" />
                 <input type="submit" value="搜索" class="m_btn" />
-            </form>                      
-            <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a href="#">蛋糕</a><a href="#">日用品</a><a href="#">连衣裙</a></span>
+            </form>
         </div>
         <div class="i_car">
             <div class="car_t">购物车 [ <span>3</span> ]</div>
@@ -195,17 +214,15 @@
             <div class="left_m">
                 <div class="left_m_t t_bg1">订单中心</div>
                 <ul>
-                    <li><a href="Member_Order.html">我的订单</a></li>
-                    <li><a href="Member_Address.html">收货地址</a></li>
-                    <li><a href="#">缺货登记</a></li>
-                    <li><a href="#">跟踪订单</a></li>
+                    <li><a href="/home/user/user_order">我的订单</a></li>
+                    <li><a href="/home/user/user_addres">收货地址</a></li>
                 </ul>
             </div>
             <div class="left_m">
                 <div class="left_m_t t_bg2">会员中心</div>
                 <ul>
-                    <li><a href="Member_User.html">用户信息</a></li>
-                    <li><a href="Member_Collect.html">我的收藏</a></li>
+                    <li><a href="/home/user/userdetail">用户信息</a></li>
+                    <li><a href="/home/user/usercollection">我的收藏</a></li>
                     <li><a href="Member_Msg.html">我的留言</a></li>
                     <li><a href="Member_Links.html">推广链接</a></li>
                     <li><a href="#">我的评论</a></li>
@@ -214,7 +231,7 @@
             <div class="left_m">
                 <div class="left_m_t t_bg3">账户中心</div>
                 <ul>
-                    <li><a href="Member_Safe.html">账户安全</a></li>
+                    <li><a href="/home/user/usersecurity">账户安全</a></li>
                     <li><a href="Member_Packet.html">我的红包</a></li>
                     <li><a href="Member_Money.html">资金管理</a></li>
                 </ul>

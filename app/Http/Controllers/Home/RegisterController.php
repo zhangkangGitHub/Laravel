@@ -72,7 +72,6 @@ class RegisterController extends Controller
 	public function insert(Request $request)
 	{
 		// dd($request->all());
-
 		//验证手机验证码
 		$phone = $request->input('phone',0);
 
@@ -92,6 +91,7 @@ class RegisterController extends Controller
 		//压入到数据库
 		$user = new Users;
 		$user->uname = $request->input('phone','');
+		$user->phone = $request->input('phone','');
 		$user->upass = Hash::make($request->input('upass',''));
 		if($user->save()){
 			echo "<script>alert('注册成功,请登录');location.href='/home/user/login';</script>";
@@ -109,14 +109,15 @@ class RegisterController extends Controller
 		$code = rand(1234,4321);
 		//如果存入到redis中 注意键名覆盖
 		$k = $phone.'_code'; 
+		
 		session([$k=>$code]);
 		// exit;
 
 		$url = "http://v.juhe.cn/sms/send";
 		$params = array(
-		    'key'   => '9d4a56ebc5ae5c78a587620162d9083d', //您申请的APPKEY
+		    'key'   => '0c6d380d1dd9bcd0a2ab2f6b236db6fa', //您申请的APPKEY
 		    'mobile'    => $phone, //接受短信的用户手机号码
-		    'tpl_id'    => '176546', //您申请的短信模板ID，根据实际情况修改
+		    'tpl_id'    => '177539', //您申请的短信模板ID，根据实际情况修改
 		    'tpl_value' =>'#code#='.$code, //您设置的模板变量，根据实际情况修改
 			'dtype'	=> 'json'
 		);
@@ -124,7 +125,7 @@ class RegisterController extends Controller
 		$paramstring = http_build_query($params);
 		$content = self::juheCurl($url, $paramstring);
 		// echo $content; 
-		// $result = json_decode($content, true);  //将json格式转化成数组
+		$result = json_decode($content, true);  //将json格式转化成数组
 		//返回结构
 		// if ($result) {
 		// 	var_dump($result);
