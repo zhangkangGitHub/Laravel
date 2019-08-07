@@ -15,13 +15,13 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (session('admin_login')) {
+        
+        if(session('shop_login')){
             // 执行下一次请求
             return $next($request);
         }else{
-            return back();
+            return redirect("shop/login");
         }
-
         
     }
 }
