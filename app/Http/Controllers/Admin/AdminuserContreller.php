@@ -29,7 +29,11 @@ class AdminuserContreller extends Controller
     public function create()
     {
         //
-        echo "添加";
+        // echo "哈哈";
+        
+
+        return view('admin.adminuser.create');
+
     }
 
     /**

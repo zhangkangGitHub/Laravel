@@ -4,36 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cates;
 use DB;
+// use Illuminate\Support\Facades\DB;
 
-class CatesController extends Controller
+
+
+class NodesController extends Controller
 {
-
-    public static function getCates()
-    {
-        $cates = DB::select("select * ,concat(path,',',id) as paths from cates order by paths asc");
-
-        foreach ($cates as $key => $value) {
-            //统计,出现次数
-            $n = substr_count($value->path,',');
-
-            // 重复使用字符串
-            $cates[$key]->cname = str_repeat("|---",$n).$value->cname;
-        }
-        return $cates;
-
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {      
-        // 加载摸版
-        return view('admin.cates.index',['cates'=>self::getCates()]);
+    public function index()
+    {
+        
+     
+        $data = DB::table('nodes')->get();
+        
+        // 显示数据
+        return view('admin.nodes.index',['data'=>$data]);
+        
     }
 
     /**
@@ -41,12 +32,10 @@ class CatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $id = $request->input('id',0);
-
-        // 加载添加试图
-        return view('admin.cates.create',['id'=>$id,'cates'=>self::getCates()]);
+        // 加载摸版
+        return view('admin.nodes.create');
     }
 
     /**
@@ -58,33 +47,20 @@ class CatesController extends Controller
     public function store(Request $request)
     {
         //
-        // dump($request->input());
-        // exit;
-        // 获取pid
-        $pid = $request->input('pid');
-        
-        if ($pid == 0) {
-           $path = 0;
+        // dump($request->all());
+        $data = $request->except('_token');
+        $data['cname'] = $data['cname'].'Controller';
+        $res = DB::table('nodes')->insert($data);
+        if ($res) {
+            // 提交事务
+            DB::commit();
+            return redirect('admin/nodes')->with('success','添加成功');
         }else{
-            // 获取父级数据
-            $parent_data = Cates::find($pid);
-            $path = $parent_data->path.','.$parent_data->id;
-            // dd($parent_data->id);
-        }
-
-        // 添加
-        $cate = new Cates;
-        
-        $cate->cname = $request->input('cname','');
-        $cate->pid = $pid;
-        $cate->path = $path;
-        
-        if ($cate->save()) {
-            return redirect('admin/cates')->with('success','添加成功');
-        }else{   
+            // 回滚事务
+            DB::rollBack();
             return back()->with('error','添加失败');
         }
-    } 
+    }
 
     /**
      * Display the specified resource.

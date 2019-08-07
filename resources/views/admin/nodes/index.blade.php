@@ -11,8 +11,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>管理员名称</th>
-                        <th>管理员头像</th>
+                        <th>描述</th>
+                        <th>控制器名称</th>
+                        <th>方法名称</th> 
                         <th>操作</th> 
                     </tr>
                 </thead>

@@ -5,12 +5,36 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-// use Illuminate\Support\Facades\DB;
 
-
-
-class NodesController extends Controller
+class RolesController extends Controller
 {
+    public static function controllernames()
+    {
+        return [
+            'usersController'=>'用户管理',
+            'catesController'=>'商品管理',
+
+        ];
+    }
+
+    public static function nodes()
+    {
+        $nodes = DB::table('nodes')->get();
+        $arr = [];
+        $temp = [];
+        foreach ($nodes as $key => $value) {
+
+            $temp['id'] = $value->id;
+            $temp['desc'] = $value->desc;
+            $temp['aname'] = $value->aname;
+
+            $arr[$value->cname][] = $temp;
+        }
+        dump($arr);
+        return $arr;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +42,7 @@ class NodesController extends Controller
      */
     public function index()
     {
-        // return 333;
-     
-        $data = DB::table('nodes')->get();
-        // return $data;
-        // dd($data);
-        // return $data;
-        // 显示数据
-        return view('admin.nodes.index',['data'=>$data]);
-        
+        //
     }
 
     /**
@@ -36,8 +52,12 @@ class NodesController extends Controller
      */
     public function create()
     {
-        // 加载摸版
-        return view('admin.nodes.create');
+        $nodes = self::nodes();
+        $controllernames = self::controllernames();
+        // dump($nodes);
+        // dd($controllernames);
+        // 加载页面
+        return view('admin.roles.create',['nodes'=>$nodes,'controllernames'=>$controllernames]);
     }
 
     /**
@@ -49,19 +69,7 @@ class NodesController extends Controller
     public function store(Request $request)
     {
         //
-        // dump($request->all());
-        $data = $request->except('_token');
-        $data['cname'] = $data['cname'].'Controller';
-        $res = DB::table('nodes')->insert($data);
-        if ($res) {
-            // 提交事务
-            DB::commit();
-            return redirect('admin/nodes')->with('success','添加成功');
-        }else{
-            // 回滚事务
-            DB::rollBack();
-            return back()->with('error','添加失败');
-        }
+        dump($request->all());
     }
 
     /**

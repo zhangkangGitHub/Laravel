@@ -15,7 +15,7 @@
                         <th>管理员头像</th>
                         <th>操作</th> 
                     </tr>
-                </thead>
+                </thead> 
                 <tbody>
                     @foreach($adminuser as $k=>$v)
                     <tr>

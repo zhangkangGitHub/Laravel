@@ -345,6 +345,13 @@
                             <li><a href="/admin/nodes/create">权限添加</a></li>
                         </ul>
                     </li>
+                    <li class="active"> 
+                        <a href="/d/#"><i class="icon-list"></i>网站配置</a>
+                        <ul> 
+                            <li><a href="/admin/webs/">添加网站配置</a></li>
+                            <!-- <li><a href="/admin/nodes/create">修改网站配置</a></li> -->
+                        </ul>
+                    </li>
                     
                     <!-- <li>
                         <a href="/d/icons.html">

@@ -34,10 +34,13 @@ class RegisterController extends Controller
 		$users->uname = $request->input('email','');
 		$users->upass = Hash::make($request->input('upass',''));
 		$users->token = str_random(30);
+		// return $users->save();
 		if($users->save()){
+			// return $users->id;
 			$uid = $users->id;
 			$usersinfo = new Userinfo;
 			$usersinfo->profile ='20190725/hq2WMI1ILn7dfN3vZ9WG4F22wRpPLPVmaYKhmQQm.jpeg';
+			$usersinfo->uid=$uid;
 			if($usersinfo->save()){
 				// 发送邮件 mail::send()=>return view()
     			Mail::send('home.email.email', ['id' => $users->id,'token'=>$users->token], function ($m) use ($users) {
