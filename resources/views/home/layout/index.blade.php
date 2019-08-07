@@ -107,7 +107,27 @@
         </span>
         <!--End 所在收货地区 End-->
         <span class="fr">
-          <span class="fl">你好，请<a href="/home/user/login">登录</a>&nbsp; <a href="/home/register" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|</span>
+          @if(empty($_SESSION))
+            <span class="fl">你好，请<a href="/home/login">登录</a>&nbsp; <a href="/home/register" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|</span>
+          @else
+            <div class="ss_list">
+              <a>{{$_SESSION['home_users']->uname}}</a>
+              <div class="ss_list_bg">
+                <div class="s_city_t"></div>
+                <div class="ss_list_c">
+                  <div style="padding:10px 0 10px 15px;overflow:hidden;">
+                    <a href="/home/user/userdetail">
+                      <img src="/uploads/{{$_SESSION['home_userinfo']->profile}}" title="点击头像 进入个人中心" style="width:40px;height:40px;border-radius:50%;margin-left:-13px;margin-top:-10px;"/>
+                    </a>
+                    <a href="/home/login/laout" style="float:right;margin-right:3px;margin-top:-22px;">退出</a>
+                    <li style="margin-left:20px;margin-top:-30px;">  
+                      {{$_SESSION['home_users']->uname}}
+                    </li>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
           <span class="ss">
               <div class="ss_list">
                   <a href="#">收藏夹</a>

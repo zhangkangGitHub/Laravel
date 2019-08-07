@@ -30,7 +30,7 @@ class RolesController extends Controller
 
             $arr[$value->cname][] = $temp;
         }
-        dump($arr);
+        // dump($arr);
         return $arr;
 
     }

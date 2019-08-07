@@ -1,13 +1,12 @@
 @extends('home.layout.userds')
 @section('content')
-
 		<div class="m_right">
         	<div class="m_des">
             	<table border="0" style="width:870px; line-height:22px;" cellspacing="0" cellpadding="0">
                   <tr valign="top">
-                    <td width="115"><img src="/h/images/user.jpg" width="90" height="90" /></td>
+                    <td width="115"><a href="/home/user/usersecurity"><img src="/uploads/{{$_SESSION['home_userinfo']->profile}}" width="90" height="90" /></a></td>
                     <td>
-                    	<div class="m_user">TRACY</div>
+                    	<div class="m_user">{{$_SESSION['home_users']->uname}}</div>
                         <p>
                             等级：注册用户 <br />
                             <font color="#ff4e00">您还差 270 积分达到 分红100</font><br />

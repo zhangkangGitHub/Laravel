@@ -41,7 +41,7 @@
               <div class="clear"></div>
             
             <div class="login-form">
-              <form method="post" action="/home/user/login">
+              <form method="post" action="/home/login">
               {{ csrf_field() }}
                  <div class="user-name">
                     <label for="user"><i class="am-icon-user"></i></label>
